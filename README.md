@@ -1,5 +1,5 @@
-# NVIDIA-Certified Associate - Generative AI LLM - Deep-Learning-labs
-These labs are hands-on python labs designed to teach students the fundamentals of Deep Learning by allowing students to build and train very simple Artificial Neural Networks, Transformers and Natural Language Processing
+# NVIDIA Deep Learning Labs
+These labs are hands-on python labs designed to teach students the fundamentals of Deep Learning by allowing students to build and train very simple Artificial Neural Networks. Additional labs discuss Transformer architecture and Natural Language Processing
 
 
 ## Lab 1 - Creating and Training a Neural Network on MNIST dataset
@@ -34,3 +34,12 @@ In this lab I learned:
     - Epochs: 20
     - Training - Loss: 00.81, Accuracy:99.66%
     - Validation - Loss: 24.51, Accuracy: 97.49%
+
+
+## Lab 4 A - Using the prior CNN model and augmenting the data
+- Data augmentation: Further reducing the loss and increasing the accuracy of the model  by increased size of image quantiy (augmented image data), which provides the model variance in patterns.  Image augmentation should consider the reality of augmented data, for example, an inverse ASL image is not realistic while slightly tilted are ok.
+
+- Lab outcome: 
+    - Epochs: 20
+    - Training - Loss: 12.28 Accuracy: 99.59%
+    - Validation - Loss: 7.49 Accuracy: 98.76%

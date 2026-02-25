@@ -53,7 +53,7 @@ train_loader = DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=True)
 
 batch = next(iter(train_loader))
 
-n_classes = 24
+n_classes = 24      #output size
 kernel_size = 3
 flattened_img_size = 75 * 3 * 3
 

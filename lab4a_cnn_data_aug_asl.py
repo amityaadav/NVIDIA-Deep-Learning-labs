@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 
 import utils
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+torch.cuda.is_available()
+
 # preparing the data
 IMG_HEIGHT = 28
 IMG_WIDTH = 28
@@ -82,7 +85,7 @@ base_model = nn.Sequential(
 loss_function = nn.CrossEntropyLoss()
 optimizer = Adam(base_model.parameters())
 
-model = torch.compile(base_model.to(device))
+model = base_model.to(device)
 
 row_0 = train_df.head(1)
 y_0 = row_0.pop('label')
@@ -142,3 +145,40 @@ new_x_0 = random_transforms(x_0)
 image = F.to_pil_image(new_x_0)
 plt.imshow(image, cmap='gray')
 
+def train():        # Training function
+    loss = 0
+    accuracy = 0
+
+    model.train()
+    for x, y in train_loader:
+        output = model(random_transforms(x))  # Updated
+        optimizer.zero_grad()
+        batch_loss = loss_function(output, y)
+        batch_loss.backward()
+        optimizer.step()
+
+        loss += batch_loss.item()
+        accuracy += utils.get_batch_accuracy(output, y, train_N)
+    print('Train - Loss: {:.4f} Accuracy: {:.4f}'.format(loss, accuracy))
+
+def validate():     # Validation function
+    loss = 0
+    accuracy = 0
+
+    model.eval()
+    with torch.no_grad():
+        for x, y in valid_loader:
+            output = model(x)
+
+            loss += loss_function(output, y).item()
+            accuracy += utils.get_batch_accuracy(output, y, valid_N)
+    print('Valid - Loss: {:.4f} Accuracy: {:.4f}'.format(loss, accuracy))
+
+epochs = 20
+
+for epoch in range(epochs):
+    print('Epoch: {}'.format(epoch))
+    train()
+    validate()
+
+torch.save(base_model, 'model.pth')

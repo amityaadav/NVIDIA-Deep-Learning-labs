@@ -77,11 +77,11 @@ layers = [
     nn.Flatten(),               # Flatten all layers so that we turn n-dimensional data into a vector, 
                                 # because we are using "Linear"/fully-connected layers in this lab, 
                                 # thus it's a mathematical dependency, not a requirement
-    nn.Linear(input_size, 512), # Input Layer
+    nn.Linear(input_size, 512), # Input Layer with 512 neurons
     nn.ReLU(),                      # Input layer activation function
-    nn.Linear(512,512),         # Hidden Layer
+    nn.Linear(512,512),         # Hidden Layer.  input of 512 neurons, and output of 512 neurons
     nn.ReLU(),                      # Input layer activation function
-    nn.Linear(512, n_classes)   # Output layer
+    nn.Linear(512, n_classes)   # Output layer.  Input of 512 neurons from previous hidden layer and output of 10 neurons
 ]
 print(f"These are the layer properties: {layers}")
 
